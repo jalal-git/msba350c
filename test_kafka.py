@@ -9,7 +9,7 @@ spark = SparkSession \
 # create kafka streaming
 kafkaDF = (spark
   .readStream
-  .option("kafka.bootstrap.servers", "your.server.name:port")
+  .option("kafka.bootstrap.servers", "localhost:9009")
   .option("subscribe", "en")
   .format("kafka")
   .load()
