@@ -15,4 +15,10 @@ kafkaDF = (spark
   .load()
 )
 
-kafkaDF.show()
+query = kafkaDF \
+    .writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .start()
+query.start()
+query.awaitTermination()
