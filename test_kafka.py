@@ -6,10 +6,10 @@ spark = SparkSession \
         .config("spark.sql.debug.maxToStringFields", "100") \
         .getOrCreate()
 
-df = spark.readStream
-      .format("socket")
-      .option("host","localhost")
-      .option("port","9009")
+df = spark.readStream \
+      .format("socket") \
+      .option("host","localhost") \
+      .option("port","9009") \
       .load()
 
 query = (df.show().writeStream.outputMode("complete").format("console").queryName("counts").start())
