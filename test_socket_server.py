@@ -13,7 +13,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     print(f"Connected by { addr}")
     data = conn.recv(1024)
     print(data.decode())
-    conn.sendall("Hello World!".encode())
+    conn.sendall("""{"1":1, "2":2}""".encode())
     print('sent')
     # data = conn.send("Hello World".encode)
     
