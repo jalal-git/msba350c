@@ -4,10 +4,11 @@ import json
 
 HOST = 'localhost'
 PORT = 9009
-while True:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        s.listen()
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    while True:
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by { addr}")
