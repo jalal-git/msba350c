@@ -10,7 +10,7 @@ conf.setAppName("StreamApp")
 # create spark instance with the above configuration
 sc = SparkContext(conf=conf)
 sc.setLogLevel("ERROR")
-ssc = StreamingContext(sc, 10)
+ssc = StreamingContext(sc, 1)
 # add checkpoint
 ssc.checkpoint("checkpoint_App")
 
