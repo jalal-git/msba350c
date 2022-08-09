@@ -34,7 +34,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by {addr}")
-        conn.send(str([{names[i]:elem[i] for i in range(12)} for elem in ticks]).encode())
+        conn.send(str(ticks).encode())
         conn.close()
         print('sent')
         time.sleep(60)
