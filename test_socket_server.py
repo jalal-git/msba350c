@@ -33,7 +33,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
         ticks = requests.get('https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1m').json()
         
-        conn.send(str(ticks).encode())
+        conn.send(str(ticks)+"\n".encode())
         print('sent')
         time.sleep(60)
         
