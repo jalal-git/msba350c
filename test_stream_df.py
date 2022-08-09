@@ -21,11 +21,9 @@ df = spark \
 
 #wordsDF = df.select(explode(split(df("value")," "))).show()
 
-
-process = df.selectExpr("split(value, ' ')[0] as col1", "split(value, ' ')[1] as col2", "split(value, ' ')[2] as col3"
-                       "split(value, ' ')[3] as col1", "split(value, ' ')[4] as col2", "split(value, ' ')[5] as col3"
-                       "split(value, ' ')[6] as col1", "split(value, ' ')[7] as col2", "split(value, ' ')[8] as col3"
-                       "split(value, ' ')[9] as col1", "split(value, ' ')[10] as col2", "split(value, ' ')[11] as col3")
+process = df.selectExpr("split(value, ' ')[0] as open time", "split(value, ' ')[1] as open", "split(value, ' ')[2] as high", 
+                       "split(value, ' ')[3] as low", "split(value, ' ')[4] as close", "split(value, ' ')[5] as volume",
+                       "split(value, ' ')[6] as close time")
 
 query = process \
     .writeStream \
