@@ -15,20 +15,4 @@ df = spark \
     .option("port", 9999) \
     .load()
 
-df.createOrReplaceTempView("data")
-
-sqlDF = spark.sql("""
-
-select *,
-  avg(close) OVER(ORDER BY "open time"
-  ROWS BETWEEN 1 PRECEDING AND CURRENT ROW )
-     as 2day_moving_averagee,
-
-  avg(close) OVER(ORDER BY "open time"
-  ROWS BETWEEN 29 PRECEDING AND CURRENT ROW )
-      as 30day_moving_average
-
-
-from data""")
-
-sqlDF.show()
+df.show()
