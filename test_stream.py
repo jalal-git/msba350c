@@ -16,7 +16,7 @@ ssc.checkpoint("checkpoint_App")
 
 lines = ssc.socketTextStream("localhost",9009)
 print("connected!")
-values = lines.flatMap(lambda line: line[0]))
+values = lines.flatMap(lambda line: line[0])
 
 
 values.pprint()
