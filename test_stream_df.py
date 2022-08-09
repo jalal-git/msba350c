@@ -18,7 +18,7 @@ df = spark \
 
 #avg_open = df.agg({'open': 'mean'}).collect()
 
-process = df.select(max("salary")).show(truncate=False)
+process = df.select(max("open")).show(truncate=False)
 
 query = process \
     .writeStream \
