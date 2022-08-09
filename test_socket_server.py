@@ -1,6 +1,7 @@
 import socket
 import time
 from binance.client import Client
+from datetime import datetime
 import time
 import warnings
 warnings.filterwarnings('ignore')
@@ -20,17 +21,22 @@ client = Client(api_key, api_secret)
 HOST = 'localhost'
 PORT = 9009
 
+data = {}
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen(1)
     
     while True:
+        s = client.get_symbol_ticker(symbol="BTCUSDT")
+        s['time'] = str(datetime.now())
+        data.update(s)
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by {addr}")
-        conn.send(client.get_symbol_ticker(symbol="BTCUSDT")['price'].encode())
+        conn.send(str(data).encode())
         conn.close()
         print('sent')
         time.sleep(10)
-        # data = conn.send("Hello World".encode)
+        
 s.close()
