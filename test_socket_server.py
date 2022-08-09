@@ -37,6 +37,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         conn.send(str([{names[i]:elem[i] for i in range(12)} for elem in ticks]).encode())
         conn.close()
         print('sent')
-        time.sleep(10)
+        time.sleep(60)
         
 s.close()
