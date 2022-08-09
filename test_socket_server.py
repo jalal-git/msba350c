@@ -15,8 +15,6 @@ creds = creds.readlines()
 api_key = creds[0].lstrip('API Key:').rstrip('\n').strip()
 api_secret = creds[1].lstrip('Secret Key:').rstrip('\n').strip()
 
-# field names
-names = ['open time', 'open', 'high', 'low', 'close', 'volume', 'close time', 'quote asset volume', 'number of trades', 'taker buy base asset volume', 'taker buy quote asset volume', 'ignore']
 
 # init
 client = Client(api_key, api_secret)
