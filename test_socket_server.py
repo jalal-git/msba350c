@@ -37,4 +37,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print('sent')
         time.sleep(60)
         
-#s.close()
+s.close()
