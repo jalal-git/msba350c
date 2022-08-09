@@ -28,9 +28,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.listen(1)
     
     while True:
-        s = client.get_symbol_ticker(symbol="BTCUSDT")
-        s['time'] = str(datetime.now())
-        data.update(s)
+        ticks = client.get_symbol_ticker(symbol="BTCUSDT")
+        ticks['time'] = str(datetime.now())
+        data.update(ticks)
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by {addr}")
