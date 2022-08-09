@@ -13,7 +13,7 @@ df = spark \
     .readStream \
     .format("socket") \
     .option("host", "localhost") \
-    .option("port", 9999) \
+    .option("port", 9009) \
     .load()
 
 #avg_open = df.agg({'open': 'mean'}).collect()
