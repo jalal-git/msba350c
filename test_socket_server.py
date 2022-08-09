@@ -4,6 +4,7 @@ from binance.client import Client
 from datetime import datetime
 import time
 import warnings
+import requests
 warnings.filterwarnings('ignore')
 
 # reading credentials file
@@ -30,7 +31,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     
     while True:
         ticks = requests.get('https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1m').json()
-        
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by {addr}")
