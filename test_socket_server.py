@@ -21,7 +21,7 @@ client = Client(api_key, api_secret)
 HOST = 'localhost'
 PORT = 9009
 
-data = {}
+data = []
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -30,7 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
         ticks = client.get_symbol_ticker(symbol="BTCUSDT")
         ticks['time'] = str(datetime.now())
-        data.update(ticks)
+        data.append(ticks)
         print("Waiting for connection ...")
         conn, addr = s.accept()
         print(f"Connected by {addr}")
