@@ -19,12 +19,12 @@ df = spark \
 #avg_open = df.agg({'open': 'mean'}).collect()
 
 
-wordsDF = df.select(explode(split(df("value")," "))).show()
+#wordsDF = df.select(explode(split(df("value")," "))).show()
 
 
-#process = df.select(max("open")).show(truncate=False)
+process = df.select(max("open")).show(truncate=False)
 
-query = wordsDF \
+query = process \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
