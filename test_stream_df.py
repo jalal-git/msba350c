@@ -27,7 +27,7 @@ process = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[
 
 query = process \
     .writeStream \
-    .outputMode("complete") \
+    .outputMode("append") \
     .format("console") \
     .start()
 
