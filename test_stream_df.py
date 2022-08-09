@@ -16,3 +16,11 @@ df = spark \
     .load()
 
 df.show()
+
+query = df \
+  .writeStream \
+  .queryName("tableName") \
+  .format("console") \
+  .start()
+
+query.awaitTermination()
