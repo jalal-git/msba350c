@@ -16,13 +16,13 @@ ssc.checkpoint("checkpoint_App")
 
 lines = ssc.socketTextStream("localhost",9009)
 print("connected!")
-words = lines.flatMap(lambda line: line.split(" "))
-pairs = words.map(lambda word: (word, 1))
-wordCounts = pairs.reduceByKey(lambda x, y: x + y)
+values = lines.flatMap(lambda line: line[0]))
 
-# Print the first ten elements of each RDD generated in this DStream to the console
-wordCounts.pprint()
-print(pairs)
+
+values.pprint()
+
+
+print(values)
 ssc.start()
 ssc.awaitTermination()
 ssc.stop()
