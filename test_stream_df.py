@@ -15,7 +15,7 @@ df = spark \
     .option("port", 9999) \
     .load()
 
-avg_open = df.select(avg("open")).collect()
+avg_open = df.select(mean("open")).collect()
 
 query = df \
     .writeStream \
