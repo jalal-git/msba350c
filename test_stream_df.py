@@ -15,12 +15,11 @@ df = spark \
     .option("port", 9999) \
     .load()
 
-df.show()
 
 query = df \
-  .writeStream \
-  .queryName("tableName") \
-  .format("console") \
-  .start()
+    .writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .start()
 
 query.awaitTermination()
