@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode
 from pyspark.sql.functions import split
+import json
 
 spark = SparkSession \
     .builder \
@@ -15,9 +16,11 @@ df = spark \
     .option("port", 9999) \
     .load()
 
-avg_open = df.agg({'open': 'mean'}).collect()
+#avg_open = df.agg({'open': 'mean'}).collect()
 
-query = avg_open \
+process = df.map(lambda x: json.loads(x)).show()
+
+query = process \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
