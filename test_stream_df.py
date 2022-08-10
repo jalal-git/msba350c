@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode
 from pyspark.sql.functions import split
+from pyspark.sql import functions as f
 import json
 
 def get_num(string):
@@ -29,7 +30,9 @@ df = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[1] as
                        "split(value, ' ')[3] as low", "split(value, ' ')[4] as close", "split(value, ' ')[5] as volume",
                        "split(value, ' ')[6] as close_time")
 
-df = df.transform(get_num)
+to_float = f.udf(lambda v: get_num(v), FloatType())
+
+df = df.select([to_float(c).alias(c) for c in df.columns])
 
 query = df \
     .writeStream \
