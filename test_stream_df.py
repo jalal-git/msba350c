@@ -23,24 +23,26 @@ df = spark \
     .option("port", 9009) \
     .load()
 
-#avg_open = df.agg({'open': 'mean'}).collect()
 
 
-#wordsDF = df.select(explode(split(df("value")," "))).show()
-
+# get dataframe
 df = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[1] as open", "split(value, ' ')[2] as high", 
                        "split(value, ' ')[3] as low", "split(value, ' ')[4] as close", "split(value, ' ')[5] as volume",
                        "split(value, ' ')[6] as close_time")
 
+# clean data frame
 to_float = f.udf(lambda v: get_num(v), FloatType())
-
 df = df.select([to_float(c).alias(c) for c in df.columns])
 
-#df.select(regexp_extract('str', r'(\d+)-(\d+)', 1).alias('d'))
+
+#create window by casting timestamp to long (number of seconds)
+w = (Window.orderBy(F.col("open_time")).rangeBetween(-180, 0))
+
+df = df.withColumn('rolling_average', F.avg("dollars").over(w))
 
 query = df \
     .writeStream \
-    .outputMode("append") \
+    .outputMode("complete") \
     .format("console") \
     .start()
 
