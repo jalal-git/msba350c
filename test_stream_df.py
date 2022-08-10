@@ -37,9 +37,9 @@ df = df.select([to_float(c).alias(c) for c in df.columns])
 
 
 # #create window by casting timestamp to long (number of seconds)
-# w = (Window.orderBy(f.col("open_time")).rangeBetween(-180, 0))
+w = (Window.orderBy(f.col("open_time")).rangeBetween(-1, 0))
+df = df.withColumn('rolling_average', f.avg("close").over(w))
 
-# df = df.withColumn('rolling_average', f.avg("close").over(w))
 
 query = df \
     .writeStream \
