@@ -26,7 +26,6 @@ df = df.selectExpr("""REGEXP_EXTRACT(split(value, ' ')[0], "\d+\.\d+") as open_t
                        "split(value, ' ')[6] as close_time""")
 
 
-df = 
 
 query = df \
     .writeStream \
