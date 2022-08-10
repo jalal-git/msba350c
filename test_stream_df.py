@@ -42,8 +42,17 @@ df = df.select([to_float(c).alias(c) for c in df.columns])
 
 # to timestamp
 to_date = f.udf(lambda v: get_date(v), StringType())
+
+# open time
 df = df.withColumn('open_timestamp', to_date('open_time'))
+df = df.withColumn('open_timestamp', df.open_timestamp.cast('timestamp'))
+
+# close time
 df = df.withColumn('close_timestamp', to_date('close_time'))
+df = df.withColumn('close_timestamp', df.close_timestamp.cast('timestamp'))
+
+
+# dropping columns
 df = df.drop('open_time', 'close_time')
 
 # #create window by casting timestamp to long (number of seconds)
