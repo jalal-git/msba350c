@@ -35,7 +35,7 @@ to_float = f.udf(lambda v: get_num(v), FloatType())
 
 df = df.select([to_float(c).alias(c) for c in df.columns])
 
-query = df \
+query = df.show() \
     .writeStream \
     .outputMode("append") \
     .format("console") \
