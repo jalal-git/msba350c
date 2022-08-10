@@ -56,8 +56,8 @@ df = df.withColumn('close_timestamp', df.close_timestamp.cast('timestamp'))
 df = df.drop('open_time', 'close_time')
 
 # #create window by casting timestamp to long (number of seconds)
-# w = (Window.orderBy(f.col("close_timestamp")).rangeBetween(-1, 0))
-# df = df.withColumn('rolling_average', f.avg("close").over(w))
+w = (Window.orderBy(f.col("close_timestamp").cast('long')).rangeBetween(-1, 0))
+df = df.withColumn('rolling_average', f.avg("close").over(w))
 
 
 query = df \
