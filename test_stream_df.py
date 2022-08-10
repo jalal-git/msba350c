@@ -58,7 +58,7 @@ df = df.drop('open_time', 'close_time')
 # #create window by casting timestamp to long (number of seconds)
 windowedAvgSignalDF = \
   df \
-    .groupBy(window("open_timestamp", "1 minutes")) \
+    .groupBy(f.window("open_timestamp", "1 minutes")) \
     .mean()
 
 
