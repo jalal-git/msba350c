@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode
 from pyspark.sql.functions import split
 from pyspark.sql import functions as f
+from pyspark.sql.types import FloatType
 import json
 
 def get_num(string):
