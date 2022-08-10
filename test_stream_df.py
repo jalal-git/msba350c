@@ -3,6 +3,10 @@ from pyspark.sql.functions import explode
 from pyspark.sql.functions import split
 import json
 
+def get_num(string):
+    pattern = "\d+\.\d+" if '.' in string else "\d+"
+    return float(re.findall(pattern, string)[0])
+
 spark = SparkSession \
     .builder \
     .appName("StructuredNetworkWordCount") \
@@ -25,7 +29,7 @@ df = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[1] as
                        "split(value, ' ')[3] as low", "split(value, ' ')[4] as close", "split(value, ' ')[5] as volume",
                        "split(value, ' ')[6] as close_time")
 
-
+df = df.transform(get_num)
 
 query = df \
     .writeStream \
