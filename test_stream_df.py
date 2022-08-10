@@ -62,7 +62,7 @@ df = df.withColumn('rolling_average', f.avg("close").over(w))
 
 query = df \
     .writeStream \
-    .outputMode("update") \
+    .outputMode("complete") \
     .format("console") \
     .start()
 
