@@ -27,15 +27,15 @@ df = spark \
 
 #wordsDF = df.select(explode(split(df("value")," "))).show()
 
-df = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[1] as open", "split(value, ' ')[2] as high", 
+df = df.selectExpr("split(split(value, ' ')[0], '[[')[1] as open_time", "split(value, ' ')[1] as open", "split(value, ' ')[2] as high", 
                        "split(value, ' ')[3] as low", "split(value, ' ')[4] as close", "split(value, ' ')[5] as volume",
                        "split(value, ' ')[6] as close_time")
 
-to_float = f.udf(lambda v: get_num(v), FloatType())
+# to_float = f.udf(lambda v: get_num(v), FloatType())
 
-df = df.select([to_float(c).alias(c) for c in df.columns])
+# df = df.select([to_float(c).alias(c) for c in df.columns])
 
-query = df.show() \
+query = df \
     .writeStream \
     .outputMode("append") \
     .format("console") \
