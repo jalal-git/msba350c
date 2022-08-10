@@ -9,7 +9,7 @@ import json
 
 def get_num(string):
     pattern = "\d+\.\d+" if '.' in string else "\d+"
-    return float(re.findall(pattern, string)[0])
+    return float(re.findall(pattern, string)[0]) if '.' in string else float(re.findall(pattern, string)[0])/1000
 
 spark = SparkSession \
     .builder \
