@@ -9,7 +9,7 @@ import json
 import datetime
 
 def get_date(your_timestamp):
-    return str(datetime.datetime.fromtimestamp(your_timestamp))
+    return datetime.datetime.fromtimestamp(your_timestamp)
 
 
 def get_num(string):
