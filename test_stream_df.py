@@ -41,7 +41,7 @@ to_float = f.udf(lambda v: get_num(v), FloatType())
 df = df.select([to_float(c).alias(c) for c in df.columns])
 
 # to timestamp
-df = df.withColumn('open_time_str', f.udf(to_date('open_time'))
+df = df.withColumn('open_time_str', f.udf(to_date('open_time')))
 df = df.withColumn('open_timestamp', f.to_timestamp("open_time", "yyyy/MM/dd HHmm"))
 
 # #create window by casting timestamp to long (number of seconds)
