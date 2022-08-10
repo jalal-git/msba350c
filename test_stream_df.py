@@ -43,7 +43,7 @@ df = df.select([to_float(c).alias(c) for c in df.columns])
 
 query = df \
     .writeStream \
-    .outputMode("append") \
+    .outputMode("update") \
     .format("console") \
     .start()
 
