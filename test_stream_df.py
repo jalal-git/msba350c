@@ -35,10 +35,12 @@ df = df.selectExpr("split(value, ' ')[0] as open_time", "split(value, ' ')[1] as
 to_float = f.udf(lambda v: get_num(v), FloatType())
 df = df.select([to_float(c).alias(c) for c in df.columns])
 
+# to timestamp
+df = df.withColumn('open_timestamp',f.to_timestamp("open_time", "yyyy/MM/dd HHmm"))
 
 # #create window by casting timestamp to long (number of seconds)
-w = (Window.orderBy(f.col("open_time")).rangeBetween(-1, 0))
-df = df.withColumn('rolling_average', f.avg("close").over(w))
+# w = (Window.orderBy(f.col("open_time")).rangeBetween(-1, 0))
+# df = df.withColumn('rolling_average', f.avg("close").over(w))
 
 
 query = df \
